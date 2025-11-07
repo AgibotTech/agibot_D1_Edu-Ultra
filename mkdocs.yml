@@ -1,9 +1,9 @@
 # mkdocs.yml
 # 仓库链接（显示在右上角）
 site_name: Dog SDK Documentation
-site_url: https://your-username.github.io/your-repo-name/
-repo_url: https://github.com/your-username/your-repo-name
-repo_name: your-username/your-repo-name
+site_url: https://github.com/AgibotTech/agibot_D1_Edu-Ultra.git
+repo_url: https://github.com/AgibotTech/agibot_D1_Edu-Ultra.git
+repo_name: github-AgibotTech
 # edit_uri: edit/main/docs/
 
 # 在这里配置 mkdocs-material 主题
@@ -103,7 +103,7 @@ markdown_extensions:
       custom_fences:
         - name: mermaid
           class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
+          format: python/name:pymdownx.superfences.fence_code_format
 
 
 # 插件

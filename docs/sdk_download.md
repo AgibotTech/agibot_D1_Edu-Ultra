@@ -27,10 +27,10 @@ grep -oP 'motion-control_\K[^_]+' /etc/release/*[^rootfs]*.yaml
 
 | 运控版本编号 | SDK版本 |
 | --- | --- |
-| 0.2.6 ~ 最新 | [0.2.7](https://github.com/zsibot/zsibot_sdk/tree/v0.2.7) |
+| 0.2.6 ~ 最新 | [0.2.7](https://github.com/AgibotTech/agibot_D1_Edu-Ultra.git) |
 
 ### 小狗轮足（zsl-1w）
 
 | 运控版本编号 | SDK版本 |
 | --- | --- |
-| 0.3.1 ~ 最新 | [0.2.7](https://github.com/zsibot/zsibot_sdk/tree/v0.2.7) |
+| 0.3.1 ~ 最新 | [0.2.7](https://github.com/AgibotTech/agibot_D1_Edu-Ultra.git) |
