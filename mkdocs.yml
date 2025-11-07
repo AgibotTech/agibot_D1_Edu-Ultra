@@ -51,7 +51,6 @@ theme:
     # 其他功能
     - toc.follow                # 目录跟随
     - toc.integrate             # 集成目录
-
   # 字体配置
   font:
     text: Roboto
@@ -60,6 +59,10 @@ theme:
   # 图标配置
   icon:
     repo: fontawesome/brands/github
+
+# 自定义目录
+extra_css:
+  - styles/extra.css
 
 # 社交链接
 # extra:
@@ -70,13 +73,37 @@ theme:
 #       link: https://twitter.com/your-handle
 
 # 分析统计（可选）
-# extra:
+extra:
   analytics:
     provider: google
     property: YOUR-GA-ID
 
 # 版权信息
 # copyright: Copyright &copy; 2024 Your Company
+
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed
+  - pymdownx.highlight:  # 注意这里的冒号，表示下面是它的子配置
+      linenums: true        # 子项：缩进一层（通常2或4个空格）
+      linenums_style: "table"  # 同样缩进一层
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.keys
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.tasklist
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 
 # 插件
@@ -86,8 +113,15 @@ nav:
   - Home: index.md
   - Downloads: sdk_download.md
   - Deploy: deploy.md
-  - Architecture: architecutre.md
-  - Interface: api.md
+  - Architecture: architecture.md
+  - Interface: 
+    - api.md
+    - zsl-1 API: api_zsl-1.md
+    - zsl-1w API: api_zsl-1w.md
+    - zsm-1w API: api_zsm-1w.md
+    # - dog task API: api_dog_task.md
+    - lowlevel API: api_lowlevel.md
+  - Videos: video.md
   - FAQ: faq.md
   - Change Log: changelog.md
   - About: about.md
