@@ -1,6 +1,6 @@
 # Agibot D1系列SDK开发指南
 
-欢迎使用 AgiBot 二次开发 SDK。
+欢迎使用AgiBot二次开发SDK。
 
 ## 快速开始
 

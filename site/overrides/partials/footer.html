@@ -1,0 +1,30 @@
+<!-- 引入翻译库 -->
+<script src="https://cdn.staticfile.net/translate.js/3.12.0/translate.js"></script>
+<script>
+(function() {
+  // 设置不翻译的元素类名
+  translate.ignore.class.push(
+    'md-select',           // Material 选择框
+    'footer-highlight',    // 页脚高亮文本
+    'md-footer-copyright', // 版权信息
+    'no-translate'         // 通用不翻译类
+  );
+
+  // 设置本地语种（默认中文简体）
+  translate.language.setLocal('chinese_simplified');
+
+  // 自动识别用户首选语言
+  translate.setAutoDiscriminateLocalLanguage();
+
+  // 隐藏默认语言选择框
+  translate.selectLanguageTag.show = false;
+
+  // 设置翻译服务通道
+  translate.service.use('client.edge');
+
+  // 执行翻译初始化
+  translate.execute();
+
+  console.log('翻译功能已初始化');
+})();
+</script>
