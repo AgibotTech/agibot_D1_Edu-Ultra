@@ -14,7 +14,6 @@ release = 'V0.2.7'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-# extensions = ['myst_parser']
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
@@ -30,6 +29,13 @@ templates_path = ['_templates']
 exclude_patterns = []
 
 language = 'zh_CN'
+
+# 隐藏右上角 View Source 链接
+html_copy_source = False
+html_show_sourcelink = False
+
+html_show_sphinx = False
+html_secnumber_suffix = ' '
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
