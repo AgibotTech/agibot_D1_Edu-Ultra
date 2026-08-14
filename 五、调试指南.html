@@ -1,0 +1,170 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>五、调试指南 &mdash; D1_Edu-Ultra V0.2.7 文档</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=580a5a4c"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=beaddf03"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="5.1 视频流推送服务" href="5.1%E8%A7%86%E9%A2%91%E6%B5%81%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1.html" />
+    <link rel="prev" title="4.3 LowLevel 数据结构与函数说明" href="4.3LowLevel%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            D1_Edu-Ultra
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="%E4%B8%80%E3%80%81%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D.html">一、产品介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.html">二、系统架构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E4%B8%89%E3%80%81SDK%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.html">三、SDK开发指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%9B%9B%E3%80%81API%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html">四、API函数介绍</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">五、调试指南</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="5.1%E8%A7%86%E9%A2%91%E6%B5%81%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1.html">5.1 视频流推送服务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.2%E6%8C%87%E7%A4%BA%E7%81%AF%E8%AF%B4%E6%98%8E.html">5.2 指示灯说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.3%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E6%9F%A5%E8%AF%A2.html">5.3 异常日志查询</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.4%E6%8E%A7%E5%88%B6%E6%9D%83%E5%88%87%E6%8D%A2%E5%8A%9F%E8%83%BD.html">5.4 控制权切换功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.5%E8%BF%9E%E6%8E%A5%E5%A4%96%E9%83%A8wifi.html">5.5 连接外部wifi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.6%E4%BF%AE%E6%94%B9%E6%9C%89%E7%BA%BF%E7%BD%91%E5%8F%A3IP%E5%9C%B0%E5%9D%80.html">5.6 修改有线网口IP地址</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.7%E5%9C%A8%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%9C%AC%E4%BD%93%E8%BF%90%E8%A1%8CSDK.html">5.7 在机器人本体运行SDK</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%85%AD%E3%80%81FAQ.html">六、FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">D1_Edu-Ultra</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">五、调试指南</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/五、调试指南.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>五、调试指南<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="5.1%E8%A7%86%E9%A2%91%E6%B5%81%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1.html">5.1 视频流推送服务</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="5.1%E8%A7%86%E9%A2%91%E6%B5%81%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1.html#vlc">5.1.1 VLC查看</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.1%E8%A7%86%E9%A2%91%E6%B5%81%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1.html#ffmpeg">5.1.2 通过ffmpeg获取视频流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.1%E8%A7%86%E9%A2%91%E6%B5%81%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1.html#gstreamer">5.1.3 通过GStreamer获取视频流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.1%E8%A7%86%E9%A2%91%E6%B5%81%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1.html#opencv">5.1.4 通过OpenCV获取视频流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.1%E8%A7%86%E9%A2%91%E6%B5%81%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1.html#opencvgstreamer">5.1.5 通过OpenCV使用GStreamer获取视频流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.1%E8%A7%86%E9%A2%91%E6%B5%81%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1.html#id2">5.1.6 优化视频流延迟</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.1%E8%A7%86%E9%A2%91%E6%B5%81%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1.html#wifi">5.1.7 连接外部wifi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="5.2%E6%8C%87%E7%A4%BA%E7%81%AF%E8%AF%B4%E6%98%8E.html">5.2 指示灯说明</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="5.2%E6%8C%87%E7%A4%BA%E7%81%AF%E8%AF%B4%E6%98%8E.html#id2">5.2.1 四足机器人尾灯说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.2%E6%8C%87%E7%A4%BA%E7%81%AF%E8%AF%B4%E6%98%8E.html#id3">5.2.2 电池指示灯说明</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="5.3%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E6%9F%A5%E8%AF%A2.html">5.3 异常日志查询</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.4%E6%8E%A7%E5%88%B6%E6%9D%83%E5%88%87%E6%8D%A2%E5%8A%9F%E8%83%BD.html">5.4 控制权切换功能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="5.4%E6%8E%A7%E5%88%B6%E6%9D%83%E5%88%87%E6%8D%A2%E5%8A%9F%E8%83%BD.html#id2">5.4.1 版本要求</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.4%E6%8E%A7%E5%88%B6%E6%9D%83%E5%88%87%E6%8D%A2%E5%8A%9F%E8%83%BD.html#id3">5.4.2 功能说明</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.4%E6%8E%A7%E5%88%B6%E6%9D%83%E5%88%87%E6%8D%A2%E5%8A%9F%E8%83%BD.html#id4">5.4.3 控制框图</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="5.5%E8%BF%9E%E6%8E%A5%E5%A4%96%E9%83%A8wifi.html">5.5 连接外部wifi</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="5.5%E8%BF%9E%E6%8E%A5%E5%A4%96%E9%83%A8wifi.html#step1-nmcliwifi">step1.使用nmcli指令将四足机器人连接到外部wifi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.5%E8%BF%9E%E6%8E%A5%E5%A4%96%E9%83%A8wifi.html#step2">step2.登录四足机器人本体</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.5%E8%BF%9E%E6%8E%A5%E5%A4%96%E9%83%A8wifi.html#step3">step3.修改四足机器人本体配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.5%E8%BF%9E%E6%8E%A5%E5%A4%96%E9%83%A8wifi.html#step4-cpp-pythonip">step4.终端修改cpp/python文件的ip配置，编译并执行</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="5.6%E4%BF%AE%E6%94%B9%E6%9C%89%E7%BA%BF%E7%BD%91%E5%8F%A3IP%E5%9C%B0%E5%9D%80.html">5.6 修改有线网口IP地址</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="5.6%E4%BF%AE%E6%94%B9%E6%9C%89%E7%BA%BF%E7%BD%91%E5%8F%A3IP%E5%9C%B0%E5%9D%80.html#step1-ssh">step1.使用终端工具或 ssh 工具进入四足机器人</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.6%E4%BF%AE%E6%94%B9%E6%9C%89%E7%BA%BF%E7%BD%91%E5%8F%A3IP%E5%9C%B0%E5%9D%80.html#step2-eth0">step2.编辑 eth0 的配置文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.6%E4%BF%AE%E6%94%B9%E6%9C%89%E7%BA%BF%E7%BD%91%E5%8F%A3IP%E5%9C%B0%E5%9D%80.html#step3">step3.重启四足机器人，配置生效</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="5.7%E5%9C%A8%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%9C%AC%E4%BD%93%E8%BF%90%E8%A1%8CSDK.html">5.7 在机器人本体运行SDK</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="5.7%E5%9C%A8%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%9C%AC%E4%BD%93%E8%BF%90%E8%A1%8CSDK.html#step1-sdk">step1.将 sdk 拷贝到机器人本体内</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.7%E5%9C%A8%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%9C%AC%E4%BD%93%E8%BF%90%E8%A1%8CSDK.html#step2">step2.登录到机器人本体</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.7%E5%9C%A8%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%9C%AC%E4%BD%93%E8%BF%90%E8%A1%8CSDK.html#step3-sdk">step3.修改 sdk 配置文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.7%E5%9C%A8%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%9C%AC%E4%BD%93%E8%BF%90%E8%A1%8CSDK.html#step4-sdk">step4.修改和编译 sdk 文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5.7%E5%9C%A8%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%9C%AC%E4%BD%93%E8%BF%90%E8%A1%8CSDK.html#step5-demo">step5.运行 demo 示例</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="4.3LowLevel%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E.html" class="btn btn-neutral float-left" title="4.3 LowLevel 数据结构与函数说明" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="5.1%E8%A7%86%E9%A2%91%E6%B5%81%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1.html" class="btn btn-neutral float-right" title="5.1 视频流推送服务" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, Agibot。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
