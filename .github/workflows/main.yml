@@ -32,6 +32,8 @@ jobs:
           pip install sphinx sphinx-rtd-theme
           # 如果你有其他依赖（如 sphinx-autobuild），在这里添加
           pip install sphinx-autobuild
+          pip install sphinx myst-parser
+          
       
       # 步骤4：构建文档
       - name: Build HTML
