@@ -1,0 +1,1295 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.1 HighLevel函数介绍 &mdash; D1_Edu-Ultra V0.2.7 文档</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=580a5a4c"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=beaddf03"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="4.2 LowLevel函数介绍" href="4.2LowLevel%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html" />
+    <link rel="prev" title="四、API函数介绍" href="%E5%9B%9B%E3%80%81API%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            D1_Edu-Ultra
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="%E4%B8%80%E3%80%81%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D.html">一、产品介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.html">二、系统架构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E4%B8%89%E3%80%81SDK%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.html">三、SDK开发指南</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="%E5%9B%9B%E3%80%81API%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html">四、API函数介绍</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.1 HighLevel函数介绍</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.1.1 初始化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.1.2 检查通讯状态</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4.1.3 站起</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.1.4 趴下</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">4.1.5 阻尼</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4.1.6 移动</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">4.1.7 原地跳</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">4.1.8 向前跳</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.1.9 后空翻</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.1.10 打招呼</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">4.1.11 双腿站立</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">4.1.12 退出双腿站立</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">4.1.13 姿态控制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">4.1.14 获取姿态四元数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">4.1.15 获取姿态欧拉角</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">4.1.16 获取加速度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">4.1.17 获取角速度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">4.1.18 获取原点坐标系位置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">4.1.19 获取原点坐标系速度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">4.1.20 获取自身移动速度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">4.1.21 获取电量</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">4.1.22 获取控制模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#abad">4.1.23 获取Abad关节角度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hip">4.1.24 获取Hip关节角度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#knee">4.1.25 获取Knee关节角度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">4.1.26 获取Abad关节的角速度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">4.1.27 获取Hip关节角速度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">4.1.28 获取Knee关节角速度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">4.1.29 获取Abad关节扭矩</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">4.1.30 获取相Hip关节扭矩</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id28">4.1.31 获取Knee关节扭矩</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="4.2LowLevel%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html">4.2 LowLevel函数介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.3LowLevel%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%87%BD%E6%95%B0%E8%AF%B4%E6%98%8E.html">4.3 LowLevel 数据结构与函数说明</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E4%BA%94%E3%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97.html">五、调试指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%85%AD%E3%80%81FAQ.html">六、FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">D1_Edu-Ultra</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="%E5%9B%9B%E3%80%81API%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html">四、API函数介绍</a></li>
+      <li class="breadcrumb-item active">4.1 HighLevel函数介绍</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/4.1HighLevel函数介绍.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="highlevel">
+<h1>4.1 HighLevel函数介绍<a class="headerlink" href="#highlevel" title="Link to this heading"></a></h1>
+<p><strong>class HighLevel</strong></p>
+<p>该类包含控制四足机器人应用功能的方法，用户可以使用这些方法来进行上层控制和获取数据。</p>
+<hr class="docutils" />
+<section id="id1">
+<h2>4.1.1 初始化<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">initRobot</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">local_ip</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">local_port</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dog_ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;192.168.234.1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+与机器狗建立通信,机器狗端ip默认&quot;192.168.234.1&quot;, 如更改机器人ip，需从该接口传入新ip</p>
+<p><strong>参数说明</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数名</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+<th class="head"><p>选项</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>local_ip</p></td>
+<td><p>string&amp;</p></td>
+<td><p>用户主机IP地址</p></td>
+<td><p>必选项</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>local_port</p></td>
+<td><p>int</p></td>
+<td><p>用户主机端口</p></td>
+<td><p>必选项</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>dog_ip</p></td>
+<td><p>string&amp;</p></td>
+<td><p>机器狗IP地址</p></td>
+<td><p>可选项</p></td>
+<td><p>默认&quot;192.168.234.1&quot;）</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>返回值</strong>
+无</p>
+<p><strong>备注</strong>
+通信建立失败时，终端输出失败日志</p>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2>4.1.2 检查通讯状态<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">checkConnection</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+检查机器人通讯状态</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：bool</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>true</p></td>
+<td><p>连接正常</p></td>
+</tr>
+<tr class="row-odd"><td><p>false</p></td>
+<td><p>连接失败</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+可做心跳检测</p>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2>4.1.3 站起<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">standUP</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+控制机器狗站立</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：uint32_t</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>进入状态正常</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3012</p></td>
+<td><p>电机数据丢失</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3010</p></td>
+<td><p>电机失能</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3011</p></td>
+<td><p>电机故障</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3009</p></td>
+<td><p>电机角度超限</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3007</p></td>
+<td><p>状态机切换失败</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3013</p></td>
+<td><p>速度命令过大</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+机器狗正常站立，移动中不可直接切入此状态</p>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>4.1.4 趴下<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">lieDown</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+控制机器狗站低</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：uint32_t</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>进入状态正常</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3012</p></td>
+<td><p>电机数据丢失</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3010</p></td>
+<td><p>电机失能</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3011</p></td>
+<td><p>电机故障</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3009</p></td>
+<td><p>电机角度超限</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3007</p></td>
+<td><p>状态机切换失败</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3013</p></td>
+<td><p>速度命令过大</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+机器狗站低，关节锁定，移动中不可直接切入此状态</p>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h2>4.1.5 阻尼<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">passive</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+控制机器狗紧急趴下</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：uint32_t</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>进入状态正常</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3012</p></td>
+<td><p>电机数据丢失</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3010</p></td>
+<td><p>电机失能</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3011</p></td>
+<td><p>电机故障</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3009</p></td>
+<td><p>电机角度超限</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3007</p></td>
+<td><p>状态机切换失败</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3013</p></td>
+<td><p>速度命令过大</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+机器狗进入阻尼状态，趴下</p>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h2>4.1.6 移动<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">move</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">yaw_rate</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+控制机器狗运动</p>
+<p><strong>参数说明</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数名</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+<th class="head"><p>选项</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>vx</p></td>
+<td><p>float</p></td>
+<td><p>前向速度</p></td>
+<td><p>必选项</p></td>
+<td><p>不进行移动时需传入0,范围（-3m/s ~ -0.05m/s; 0.05m/s ~ 3m/s）</p></td>
+</tr>
+<tr class="row-odd"><td><p>vy</p></td>
+<td><p>float</p></td>
+<td><p>侧向速度</p></td>
+<td><p>必选项</p></td>
+<td><p>不进行移动时需传入0,范围（-1.0m/s ~ -0.1m/s;0.1m/s ~ 1.0m/s）</p></td>
+</tr>
+<tr class="row-even"><td><p>yaw_rate</p></td>
+<td><p>float</p></td>
+<td><p>绕Z轴角速度</p></td>
+<td><p>必选项</p></td>
+<td><p>不进行移动时需传入0,范围（-3.0rad/s ~ -0.02rad/s;0.02rad/s ~ 3.0rad/s）</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>返回值类型：uint32_t</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>进入状态正常</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3012</p></td>
+<td><p>电机数据丢失</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3010</p></td>
+<td><p>电机失能</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3011</p></td>
+<td><p>电机故障</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3009</p></td>
+<td><p>电机角度超限</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3007</p></td>
+<td><p>状态机切换失败</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3013</p></td>
+<td><p>速度命令过大</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+仅在机器狗站立状态下切入，控制狗按指定速度运动。</p>
+</section>
+<hr class="docutils" />
+<section id="id7">
+<h2>4.1.7 原地跳<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">jump</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+控制机器狗垂直跳跃</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：uint32_t</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>进入状态正常</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3012</p></td>
+<td><p>电机数据丢失</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3010</p></td>
+<td><p>电机失能</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3011</p></td>
+<td><p>电机故障</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3009</p></td>
+<td><p>电机角度超限</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3007</p></td>
+<td><p>状态机切换失败</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3013</p></td>
+<td><p>速度命令过大</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+仅在站立状态下切入，移动中不可切换状态</p>
+</section>
+<hr class="docutils" />
+<section id="id8">
+<h2>4.1.8 向前跳<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">frontJump</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+控制机器狗向前跳</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：uint32_t</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>进入状态正常</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3012</p></td>
+<td><p>电机数据丢失</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3010</p></td>
+<td><p>电机失能</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3011</p></td>
+<td><p>电机故障</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3009</p></td>
+<td><p>电机角度超限</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3007</p></td>
+<td><p>状态机切换失败</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3013</p></td>
+<td><p>速度命令过大</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+仅在站立状态下切入，移动中不可切换状态</p>
+</section>
+<hr class="docutils" />
+<section id="id9">
+<h2>4.1.9 后空翻<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">backflip</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+控制机器狗后空翻</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：uint32_t</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>进入状态正常</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3012</p></td>
+<td><p>电机数据丢失</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3010</p></td>
+<td><p>电机失能</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3011</p></td>
+<td><p>电机故障</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3009</p></td>
+<td><p>电机角度超限</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3007</p></td>
+<td><p>状态机切换失败</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3013</p></td>
+<td><p>速度命令过大</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+仅在站立状态下切入，移动中不可切换状态
+此特技功能专为媒体展示、产品演示等特殊场景设计。
+<strong>高频次使用此功能将显著加速电机、关节等核心部件的磨损，从而可能导致产品性能下降或缩短使用寿命。</strong>
+请务必谨慎使用。</p>
+</section>
+<hr class="docutils" />
+<section id="id10">
+<h2>4.1.10 打招呼<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">shakeHand</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+控制机器狗打招呼</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：uint32_t</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>进入状态正常</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3012</p></td>
+<td><p>电机数据丢失</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3010</p></td>
+<td><p>电机失能</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3011</p></td>
+<td><p>电机故障</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3009</p></td>
+<td><p>电机角度超限</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3007</p></td>
+<td><p>状态机切换失败</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3013</p></td>
+<td><p>速度命令过大</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+仅在站立状态下切入，移动中不可切换状态
+此特技功能专为媒体展示、产品演示等特殊场景设计。
+<strong>高频次使用此功能将显著加速电机、关节等核心部件的磨损，从而可能导致产品性能下降或缩短使用寿命。</strong>
+请务必谨慎使用。</p>
+</section>
+<hr class="docutils" />
+<section id="id11">
+<h2>4.1.11 双腿站立<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">twoLegStand</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">yaw_rate</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+控制机器狗双腿站立</p>
+<p><strong>参数说明</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数名</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+<th class="head"><p>选项</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>vx</p></td>
+<td><p>float</p></td>
+<td><p>前向速度</p></td>
+<td><p>必选项</p></td>
+<td><p>不移动则传入0,范围（-0.5~-0.2 / 0.2~0.5m / s）</p></td>
+</tr>
+<tr class="row-odd"><td><p>yaw_rate</p></td>
+<td><p>float</p></td>
+<td><p>绕Z轴角速度</p></td>
+<td><p>必选项</p></td>
+<td><p>不移动则传入0,范围（-1~-0.2 / 0.2~1.0rad / s）</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>返回值类型：uint32_t</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>进入状态正常</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3012</p></td>
+<td><p>电机数据丢失</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3010</p></td>
+<td><p>电机失能</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3011</p></td>
+<td><p>电机故障</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3009</p></td>
+<td><p>电机角度超限</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3007</p></td>
+<td><p>状态机切换失败</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3013</p></td>
+<td><p>速度命令过大</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+仅在站立状态下切入，移动中不可切入该状态
+退出双腿站立状态需调用cancelTwoLegStand(),不响应其他接口
+通过参数可控制狗按指定速度运动。
+此特技功能专为媒体展示、产品演示等特殊场景设计。
+<strong>高频次使用此功能将显著加速电机、关节等核心部件的磨损，从而可能导致产品性能下降或缩短使用寿命。</strong>
+请务必谨慎使用。</p>
+</section>
+<hr class="docutils" />
+<section id="id12">
+<h2>4.1.12 退出双腿站立<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">cancelTwoLegStand</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+控制机器狗退出双腿站立</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值</strong>
+无</p>
+<p><strong>备注</strong>
+机器狗退出双腿站立状态，机器狗双腿站立状态下切入</p>
+</section>
+<hr class="docutils" />
+<section id="id13">
+<h2>4.1.13 姿态控制<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">attitudeControl</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">roll_vel</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">pitch_vel</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">yaw_vel</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">height_vel</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+控制机器狗原地扭动和身体高度变化</p>
+<p><strong>参数说明</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数名</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+<th class="head"><p>选项</p></th>
+<th class="head"><p>备注</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>roll_vel</p></td>
+<td><p>float</p></td>
+<td><p>绕X轴角速度</p></td>
+<td><p>必选项</p></td>
+<td><p>不进行控制则传入0,范围（-0.5rad/s~0.5rad/s）</p></td>
+</tr>
+<tr class="row-odd"><td><p>pitch_vel</p></td>
+<td><p>float</p></td>
+<td><p>绕Y轴角速度</p></td>
+<td><p>必选项</p></td>
+<td><p>不进行控制则传入0,范围（-0.5rad/s~0.5rad/s）</p></td>
+</tr>
+<tr class="row-even"><td><p>yaw_vel</p></td>
+<td><p>float</p></td>
+<td><p>绕Z轴角速度</p></td>
+<td><p>必选项</p></td>
+<td><p>不进行控制则传入0,范围（-0.5rad/s~0.5rad/s）</p></td>
+</tr>
+<tr class="row-odd"><td><p>height_vel</p></td>
+<td><p>float</p></td>
+<td><p>垂直高度速度</p></td>
+<td><p>必选项</p></td>
+<td><p>不进行控制则传入0,范围（-0.5m/s-0.5m/s）</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>返回值类型：uint32_t</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>进入状态正常</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3012</p></td>
+<td><p>电机数据丢失</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3010</p></td>
+<td><p>电机失能</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3011</p></td>
+<td><p>电机故障</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3009</p></td>
+<td><p>电机角度超限</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x3007</p></td>
+<td><p>状态机切换失败</p></td>
+</tr>
+<tr class="row-even"><td><p>0x3013</p></td>
+<td><p>速度命令过大</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+机器狗站立状态下切入，控制狗按指定速度原地扭动，身体高度变化。</p>
+</section>
+<hr class="docutils" />
+<section id="id14">
+<h2>4.1.14 获取姿态四元数<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getQuaternion</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取机器狗当前姿态四元数</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[w, x, y, z]</p></td>
+<td><p>包含4个元素的向量，分别对应四元数的四个分量</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="id15">
+<h2>4.1.15 获取姿态欧拉角<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getRPY</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取机器狗当前姿态的欧拉角（滚转角、俯仰角、偏航角）</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[roll, pitch, yaw]</p></td>
+<td><p>包含 3 个元素的向量，单位为弧度（rad），分别对应绕 X、Y、Z 轴的旋转角</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="id16">
+<h2>4.1.16 获取加速度<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getBodyAcc</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取机器狗身体的加速度数据（机体坐标系）</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[ax, ay, az]</p></td>
+<td><p>包含 3 个元素的向量，单位为 m/s²，分别对应 X、Y、Z 轴方向的加速度</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="id17">
+<h2>4.1.17 获取角速度<a class="headerlink" href="#id17" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getBodyGyro</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取机器狗身体的角速度数据（机体坐标系）</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[gx, gy, gz]</p></td>
+<td><p>包含 3 个元素的向量，单位为 rad/s，分别对应 X、Y、Z 轴方向的角速度</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="id18">
+<h2>4.1.18 获取原点坐标系位置<a class="headerlink" href="#id18" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getPosition</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取机器狗在上电原点坐标系中的位置坐标</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[x, y, z]</p></td>
+<td><p>包含 3 个元素的向量，单位为米（m），表示当前位置</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="id19">
+<h2>4.1.19 获取原点坐标系速度<a class="headerlink" href="#id19" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getWorldVelocity</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取机器狗在上电原点坐标系中的移动速度</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[vx, vy, vz]</p></td>
+<td><p>包含 3 个元素的向量，单位为米/秒（m/s），分别对应上电原点坐标系 X、Y、Z 轴方向的速度</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="id20">
+<h2>4.1.20 获取自身移动速度<a class="headerlink" href="#id20" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getBodyVelocity</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取机器狗在机体坐标系中的移动速度</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[vx, vy, vz]</p></td>
+<td><p>包含 3 个元素的向量，单位为 m/s，分别对应机体坐标系 X、Y、Z 轴方向的速度</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="id21">
+<h2>4.1.21 获取电量<a class="headerlink" href="#id21" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getBatteryPower</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取机器狗电量</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：uint32_t</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0-100</p></td>
+<td><p>范围: 0-100</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+返回值范围 0-100, 0为无电, 100为满电</p>
+</section>
+<hr class="docutils" />
+<section id="id22">
+<h2>4.1.22 获取控制模式<a class="headerlink" href="#id22" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getCurrentCtrlmode</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取机器狗当前控制模式</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：uint32_t</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>设备趴下，电机进入阻尼状态</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>站立状态/打招呼状态</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>设备趴下，短时间后电机进入自由状态</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>移动状态</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>动作状态(姿态模式、跳跃模式、双腿站立等)</p></td>
+</tr>
+<tr class="row-odd"><td><p>51</p></td>
+<td><p>趴下状态</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+返回的状态为最后一次设备执行的状态，若执行动作后没有收到移动指令，则返回的永远是动作状态。</p>
+</section>
+<hr class="docutils" />
+<section id="abad">
+<h2>4.1.23 获取Abad关节角度<a class="headerlink" href="#abad" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getLegAbadJoint</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取各条腿的髋关节外展 / 内收关节（Abad Joint）的当前角度</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[FR, FL, RR, RL]</p></td>
+<td><p>包含 4 个元素的向量，分别对应右前、左前、右后、左后的 Abad 关节角度（单位：rad）</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+单位rad，机器狗身体机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="hip">
+<h2>4.1.24 获取Hip关节角度<a class="headerlink" href="#hip" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getLegHipJoint</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取各条腿的髋关节俯仰关节（Hip Joint）的当前角度</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[FR, FL, RR, RL]</p></td>
+<td><p>包含 4 个元素的向量，分别对应右前、左前、右后、左后的 Hip 关节角度（单位：rad）</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+单位rad，机器狗身体机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="knee">
+<h2>4.1.25 获取Knee关节角度<a class="headerlink" href="#knee" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getLegKneeJoint</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取各条腿的膝关节（Knee Joint）的当前角度</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[FR, FL, RR, RL]</p></td>
+<td><p>包含 4 个元素的向量，分别对应右前、左前、右后、左后的 Knee 关节角度（单位：rad）</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+单位rad，机器狗身体机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="id23">
+<h2>4.1.26 获取Abad关节的角速度<a class="headerlink" href="#id23" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getLegAbadJointVel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取各条腿 Abad 关节的当前角速度</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[FR, FL, RR, RL]</p></td>
+<td><p>包含 4 个元素的向量，单位为 rad/s，分别对应右前、左前、右后、左后的关节角度</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+单位rad/s，机器狗身体机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="id24">
+<h2>4.1.27 获取Hip关节角速度<a class="headerlink" href="#id24" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getLegHipJointVel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取各条腿 Hip 关节的当前角速度</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[FR, FL, RR, RL]</p></td>
+<td><p>包含 4 个元素的向量，单位为 rad/s，分别对应右前、左前、右后、左后的节角度</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+单位rad/s，机器狗身体机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="id25">
+<h2>4.1.28 获取Knee关节角速度<a class="headerlink" href="#id25" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getLegKneeJointVel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取各条腿 Knee 关节的当前角速度</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[FR, FL, RR, RL]</p></td>
+<td><p>包含 4 个元素的向量，单位为 rad/s，分别对应右前、左前、右后、左后的关节角度</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+单位rad/s，机器狗身体机器狗朝前为X，左侧为Y，垂直向上为Z</p>
+</section>
+<hr class="docutils" />
+<section id="id26">
+<h2>4.1.29 获取Abad关节扭矩<a class="headerlink" href="#id26" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getLegAbadJointTorque</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取各条腿 Abad 关节的当前输出扭矩</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[FR, FL, RR, RL]</p></td>
+<td><p>包含 4 个元素的向量，单位通常为 N・m，对应顺序同关节扭矩</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+单位通常为 N・m，分别对应右前、左前、右后、左后的 Knee 关节扭矩</p>
+</section>
+<hr class="docutils" />
+<section id="id27">
+<h2>4.1.30 获取相Hip关节扭矩<a class="headerlink" href="#id27" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getLegHipJointTorque</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取各条腿 Hip 关节的当前输出扭矩</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[FR, FL, RR, RL]</p></td>
+<td><p>包含 4 个元素的向量，单位通常为 N・m，对应顺序同关节扭矩</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+单位通常为 N・m，分别对应右前、左前、右后、左后的 Knee 关节扭矩</p>
+</section>
+<hr class="docutils" />
+<section id="id28">
+<h2>4.1.31 获取Knee关节扭矩<a class="headerlink" href="#id28" title="Link to this heading"></a></h2>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">getLegKneeJointTorque</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+获取各条腿 Knee 关节的当前输出扭矩</p>
+<p><strong>参数说明</strong></p>
+<p>无</p>
+<p><strong>返回值类型：vector</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[FR, FL, RR, RL]</p></td>
+<td><p>包含 4 个元素的向量，单位通常为 N・m，对应顺序同关节扭矩</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong>
+单位通常为 N・m，分别对应右前、左前、右后、左后的 Knee 关节扭矩</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="%E5%9B%9B%E3%80%81API%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html" class="btn btn-neutral float-left" title="四、API函数介绍" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="4.2LowLevel%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html" class="btn btn-neutral float-right" title="4.2 LowLevel函数介绍" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, Agibot。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -81,7 +81,7 @@ int main() {
                 // 侧向速度vy为零， 前向速度vx为零
         ret = highlevel.move(0.0, 0.0, 0.3);
         break;
-      case 'e': // 右转 move(vx, vy, yaw_rate) 以-1rad/s的速度向右转动，
+      case 'e': // 右转 move(vx, vy, yaw_rate) 以-0.3rad/s的速度向右转动，
                 // 侧向速度vy为零， 前向速度vx为零
         ret = highlevel.move(0.0, 0.0, -0.3);
         break;

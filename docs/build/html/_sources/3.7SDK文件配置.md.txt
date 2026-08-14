@@ -1,0 +1,101 @@
+3.7 SDK文件配置
+===============
+
+3.7.1 无线连接模式
+------------------
+
+-   step1 修改 sdk 通信配置文件
+
+通过 vim 命令修改机器人本体 `/opt/export/config/sdk_config.yaml` 文件：
+
+```
+target_ip: "192.168.234.xx" #local_ip
+target_port: 43988
+```
+
+target\_ip：机器人控制端 IP 地址，可在控制端 PC 中通过 ifconfig 查询 target\_port默认 43988，切勿修改
+
+-   step2 配置参数修改后，需重启四足机器人生效
+
+<div STYLE="page-break-after: always;"></div>
+
+3.7.2 有线连接模式
+------------------
+
+-   step1 修改 sdk 通信配置文件
+
+通过 vim 命令修改机器人本体 `/opt/export/config/sdk_config.yaml` 文件：
+
+```
+target_ip: "192.168.234.xx" #local_ip
+target_port: 43988
+```
+
+target\_ip：机器人控制端 IP 地址，可在控制端 PC 中通过 ifconfig 查询 target\_port默认 43988，切勿修改
+
+-   step2 配置 SDK\_CLIENT\_IP
+
+如需要使用网线或其他非 192.168.234.X 网段 IP 控制设备，需要通过 vim 命令修改 `/opt/app_launch/start_motion_control.sh` 文件：
+
+```
+#!/bin/bash
+
+echo "start motion control"
+
+# 共享内存文件路径
+SHM_FILE="/dev/shm/spline_shm"
+
+# 循环检查设备是否存在
+while true; do
+    if [ -e "$SHM_FILE" ]; then
+        echo "共享内存文件 $SHM_FILE 已存在。"
+        break
+    else
+        echo "共享内存文件 $SHM_FILE 不存在，等待 1 秒后重试..."
+        sleep 1
+    fi
+done
+
+# 共享内存文件存在后执行的命令
+echo "共享内存文件已准备好，可以执行后续操作。"
+
+sudo ifconfig lo multicast
+sudo route add -net 224.0.0.0 netmask 240.0.0.0 dev lo
+
+export LD_LIBRARY_PATH=/opt/export/mc/bin
+export ROBOT_TYPE=P2
+export SDK_CLIENT_IP="机器人有线网口IP"
+
+cd /opt/export/mc/bin && taskset -c 7 ./mc_ctrl r
+```
+
+若使用有线网络连接四足机器人拓展网口，在上面代码 27 行，增加对应配置：`export SDK_CLIENT_IP="192.168.168.168"`
+
+-   step3 修改网卡名称
+
+修改四足机器人本体内 `/etc/systemd/system/robot-launch.service` 文件
+
+在 Service 里面添加一行 `Environment="ROBOT_NET_INTERFACES=wlan0"`，其中wlan0为对应网卡名称，若使用有线网络可修改为eth0
+
+完整配置文件如下：
+
+```
+[Unit]
+Description=Run robot-launch at startup
+After=network.target
+
+[Service]
+ExecStart=robot-launch server
+ExecStop=/usr/local/bin/robot_launch_stop.sh
+TimeoutStopSec=5s
+Restart=always
+User=root
+Environment="ROBOT_HOME=/home/firefly"
+Environment="ROBOT_LOG_DIR=/userdata/log"
+Environment="ROBOT_NET_INTERFACES=wlan0"  #使用有线连接时，wlan0 修改为 eth0
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**配置 SDK\_CLIENT\_IP 后，若设备开机后网络未初始化完成，此时设备蓝灯闪烁，对应网卡未分配 IP 地址，导致运控程序绑定 IP 地址失败，会造成设备无法使用遥控器。**

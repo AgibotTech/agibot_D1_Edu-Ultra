@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.3 LowLevel 数据结构与函数说明 &mdash; D1_Edu-Ultra V0.2.7 文档</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=580a5a4c"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=beaddf03"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="五、调试指南" href="%E4%BA%94%E3%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97.html" />
+    <link rel="prev" title="4.2 LowLevel函数介绍" href="4.2LowLevel%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            D1_Edu-Ultra
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="%E4%B8%80%E3%80%81%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D.html">一、产品介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.html">二、系统架构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E4%B8%89%E3%80%81SDK%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.html">三、SDK开发指南</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="%E5%9B%9B%E3%80%81API%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html">四、API函数介绍</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="4.1HighLevel%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html">4.1 HighLevel函数介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4.2LowLevel%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html">4.2 LowLevel函数介绍</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.3 LowLevel 数据结构与函数说明</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.3.1 数据结构</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">4.3.1.1 关节控制参数</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">4.3.1.2 腿部控制参数</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">4.3.1.3 关节状态参数</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">4.3.1.4 腿部状态参数</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4.3.2 函数接口</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">4.3.2.1 创建腿部控制共享内存</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">4.3.2.2 销毁腿部控制共享内存</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#imu">4.3.2.3 创建 IMU 数据共享内存</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">4.3.2.4 销毁 IMU 数据共享内存</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.3.3 注意事项</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id11">共享内存管理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">参数范围</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">实时性要求</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">数据读写</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E4%BA%94%E3%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97.html">五、调试指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%85%AD%E3%80%81FAQ.html">六、FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">D1_Edu-Ultra</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="%E5%9B%9B%E3%80%81API%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html">四、API函数介绍</a></li>
+      <li class="breadcrumb-item active">4.3 LowLevel 数据结构与函数说明</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/4.3LowLevel数据结构与函数说明.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lowlevel">
+<h1>4.3 LowLevel 数据结构与函数说明<a class="headerlink" href="#lowlevel" title="Link to this heading"></a></h1>
+<p><strong>lowlevel.h</strong> 文件定义了机器人底层电机控制接口，主要通过共享内存（SHM）实现对机器人电机控制和状态的管理，同时还包括惯性测量单元（IMU）的数据共享。</p>
+<hr class="docutils" />
+<section id="id1">
+<h2>4.3.1 数据结构<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3>4.3.1.1 关节控制参数<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p><strong>结构体原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">joint_control_def</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">p_des</span><span class="p">;</span><span class="w"> </span><span class="c1">// 目标位置（单位：弧度）</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">v_des</span><span class="p">;</span><span class="w"> </span><span class="c1">// 目标速度（单位：弧度/秒）</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">kp</span><span class="p">;</span><span class="w">    </span><span class="c1">// 比例增益</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">kd</span><span class="p">;</span><span class="w">    </span><span class="c1">// 微分增益</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">t_ff</span><span class="p">;</span><span class="w">  </span><span class="c1">// 前馈扭矩（单位：牛·米）</span>
+<span class="p">}</span><span class="w"> </span><span class="n">joint_control_t</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>字段说明</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>字段名</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>p_des</p></td>
+<td><p>float</p></td>
+<td><p>目标位置，单位为弧度</p></td>
+</tr>
+<tr class="row-odd"><td><p>v_des</p></td>
+<td><p>float</p></td>
+<td><p>目标速度，单位为弧度/秒</p></td>
+</tr>
+<tr class="row-even"><td><p>kp</p></td>
+<td><p>float</p></td>
+<td><p>比例增益，用于控制器</p></td>
+</tr>
+<tr class="row-odd"><td><p>kd</p></td>
+<td><p>float</p></td>
+<td><p>微分增益，用于控制器</p></td>
+</tr>
+<tr class="row-even"><td><p>t_ff</p></td>
+<td><p>float</p></td>
+<td><p>前馈扭矩，单位为牛·米</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h3>4.3.1.2 腿部控制参数<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p><strong>结构体原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">leg_control_def</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">joint_control_t</span><span class="w"> </span><span class="n">abad</span><span class="p">;</span><span class="w"> </span><span class="c1">// 髋关节外展/内收控制</span>
+<span class="w">    </span><span class="n">joint_control_t</span><span class="w"> </span><span class="n">hip</span><span class="p">;</span><span class="w">  </span><span class="c1">// 髋关节俯仰控制</span>
+<span class="w">    </span><span class="n">joint_control_t</span><span class="w"> </span><span class="n">knee</span><span class="p">;</span><span class="w"> </span><span class="c1">// 膝关节控制</span>
+<span class="w">    </span><span class="n">joint_control_t</span><span class="w"> </span><span class="n">foot</span><span class="p">;</span><span class="w"> </span><span class="c1">// 足部控制</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">flags</span><span class="p">;</span><span class="w">        </span><span class="c1">// 标志位，始终设置为 1</span>
+<span class="p">}</span><span class="w"> </span><span class="n">leg_control_t</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>字段说明</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>字段名</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>abad</p></td>
+<td><p>joint_control_t</p></td>
+<td><p>髋关节外展/内收控制参数</p></td>
+</tr>
+<tr class="row-odd"><td><p>hip</p></td>
+<td><p>joint_control_t</p></td>
+<td><p>髋关节俯仰控制参数</p></td>
+</tr>
+<tr class="row-even"><td><p>knee</p></td>
+<td><p>joint_control_t</p></td>
+<td><p>膝关节控制参数</p></td>
+</tr>
+<tr class="row-odd"><td><p>foot</p></td>
+<td><p>joint_control_t</p></td>
+<td><p>足部控制参数</p></td>
+</tr>
+<tr class="row-even"><td><p>flags</p></td>
+<td><p>int32_t</p></td>
+<td><p>标志位，始终设置为 1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h3>4.3.1.3 关节状态参数<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p><strong>结构体原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">joint_state_def</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">flags</span><span class="p">;</span><span class="w"> </span><span class="c1">// 状态标志位</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w">       </span><span class="c1">// 当前角度（单位：弧度）</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w">       </span><span class="c1">// 当前角速度（单位：弧度/秒）</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">t</span><span class="p">;</span><span class="w">       </span><span class="c1">// 当前扭矩（单位：牛·米）</span>
+<span class="p">}</span><span class="w"> </span><span class="n">joint_state_t</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>字段说明</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>字段名</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>flags</p></td>
+<td><p>int32_t</p></td>
+<td><p>状态标志位，包含电机状态信息</p></td>
+</tr>
+<tr class="row-odd"><td><p>p</p></td>
+<td><p>float</p></td>
+<td><p>当前角度，单位为弧度</p></td>
+</tr>
+<tr class="row-even"><td><p>v</p></td>
+<td><p>float</p></td>
+<td><p>当前角速度，单位为弧度/秒</p></td>
+</tr>
+<tr class="row-odd"><td><p>t</p></td>
+<td><p>float</p></td>
+<td><p>当前扭矩，单位为牛·米</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">flags</span></code> 的每个位表示不同的状态信息，例如电压、温度、故障标志等。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h3>4.3.1.4 腿部状态参数<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p><strong>结构体原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">leg_state_def</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">joint_state_t</span><span class="w"> </span><span class="n">abad</span><span class="p">;</span><span class="w"> </span><span class="c1">// 髋关节外展/内收状态</span>
+<span class="w">    </span><span class="n">joint_state_t</span><span class="w"> </span><span class="n">hip</span><span class="p">;</span><span class="w">  </span><span class="c1">// 髋关节俯仰状态</span>
+<span class="w">    </span><span class="n">joint_state_t</span><span class="w"> </span><span class="n">knee</span><span class="p">;</span><span class="w"> </span><span class="c1">// 膝关节状态</span>
+<span class="w">    </span><span class="n">joint_state_t</span><span class="w"> </span><span class="n">foot</span><span class="p">;</span><span class="w"> </span><span class="c1">// 足部状态</span>
+<span class="p">}</span><span class="w"> </span><span class="n">leg_state_t</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>字段说明</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>字段名</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>abad</p></td>
+<td><p>joint_state_t</p></td>
+<td><p>髋关节外展/内收状态参数</p></td>
+</tr>
+<tr class="row-odd"><td><p>hip</p></td>
+<td><p>joint_state_t</p></td>
+<td><p>髋关节俯仰状态参数</p></td>
+</tr>
+<tr class="row-even"><td><p>knee</p></td>
+<td><p>joint_state_t</p></td>
+<td><p>膝关节状态参数</p></td>
+</tr>
+<tr class="row-odd"><td><p>foot</p></td>
+<td><p>joint_state_t</p></td>
+<td><p>足部状态参数</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h2>4.3.2 函数接口<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<section id="id7">
+<h3>4.3.2.1 创建腿部控制共享内存<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">spline_data_p</span><span class="w"> </span><span class="nf">create_spline_shm</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+创建用于腿部控制和状态的共享内存。</p>
+<p><strong>返回值</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>spline_data_p</p></td>
+<td><p>指向共享内存的指针</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong></p>
+<ul class="simple">
+<li><p>共享内存路径为 <code class="docutils literal notranslate"><span class="pre">/spline_shm</span></code>。</p></li>
+<li><p>共享内存大小为 10 KB。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id8">
+<h3>4.3.2.2 销毁腿部控制共享内存<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy_spline_shm</span><span class="p">(</span><span class="n">spline_data_p</span><span class="w"> </span><span class="n">ptr</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+销毁腿部控制和状态的共享内存。</p>
+<p><strong>参数说明</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数名</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ptr</p></td>
+<td><p>spline_data_p</p></td>
+<td><p>指向共享内存的指针</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong></p>
+<ul class="simple">
+<li><p>当前实现中无需显式解除映射或删除共享内存。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="imu">
+<h3>4.3.2.3 创建 IMU 数据共享内存<a class="headerlink" href="#imu" title="Link to this heading"></a></h3>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">nav_imu_p</span><span class="w"> </span><span class="nf">create_imu_shm</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+创建用于 IMU 数据的共享内存。</p>
+<p><strong>返回值</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>返回值</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nav_imu_p</p></td>
+<td><p>指向共享内存的指针</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong></p>
+<ul class="simple">
+<li><p>共享内存路径为 <code class="docutils literal notranslate"><span class="pre">/imu_shm</span></code>。</p></li>
+<li><p>共享内存大小为 1 KB。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id9">
+<h3>4.3.2.4 销毁 IMU 数据共享内存<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<p><strong>函数原型</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy_imu_shm</span><span class="p">(</span><span class="n">nav_imu_p</span><span class="w"> </span><span class="n">ptr</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>功能概述</strong>
+销毁 IMU 数据的共享内存。</p>
+<p><strong>参数说明</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>参数名</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>说明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ptr</p></td>
+<td><p>nav_imu_p</p></td>
+<td><p>指向共享内存的指针</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注</strong></p>
+<ul class="simple">
+<li><p>当前实现中无需显式解除映射或删除共享内存。</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id10">
+<h2>4.3.3 注意事项<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<section id="id11">
+<h3>共享内存管理<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>确保在程序退出时正确销毁共享内存。</p></li>
+<li><p>多进程访问共享内存时需注意同步问题。</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3>参数范围<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">joint_control_t</span></code> 中的参数（如 <code class="docutils literal notranslate"><span class="pre">kp</span></code>、<code class="docutils literal notranslate"><span class="pre">kd</span></code>）需根据具体硬件特性设置合理范围。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">joint_state_t</span></code> 中的状态值（如 <code class="docutils literal notranslate"><span class="pre">p</span></code>、<code class="docutils literal notranslate"><span class="pre">v</span></code>、<code class="docutils literal notranslate"><span class="pre">t</span></code>）可能受硬件限制。</p></li>
+</ul>
+</section>
+<section id="id13">
+<h3>实时性要求<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>共享内存的更新频率为 1 ms，需确保消费者能够及时处理数据。</p></li>
+</ul>
+</section>
+<section id="id14">
+<h3>数据读写<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>CONSUMER_CONTROL为状态位，</p>
+<ul>
+<li><p>控制时由消费者将状态置为1，由生产者读取数据后将状态置为0。</p></li>
+<li><p>读取数据时由生产者将状态置为1，由消费者读取数据后将状态置为0。</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="4.2LowLevel%E5%87%BD%E6%95%B0%E4%BB%8B%E7%BB%8D.html" class="btn btn-neutral float-left" title="4.2 LowLevel函数介绍" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="%E4%BA%94%E3%80%81%E8%B0%83%E8%AF%95%E6%8C%87%E5%8D%97.html" class="btn btn-neutral float-right" title="五、调试指南" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, Agibot。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
