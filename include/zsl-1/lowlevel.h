@@ -27,7 +27,7 @@ struct alignas(4) motorCmd {
 };
 
 struct alignas(4) motorState {
-  // 关节顺序 FL,FR,RL,RR
+  // 关节顺序: FR,FL,RR,RL
   float q_abad[4] = {0.0, 0.0, 0.0, 0.0};  // A关节角度
   float q_hip[4] = {0.0, 0.0, 0.0, 0.0};   // H关节角度
   float q_knee[4] = {0.0, 0.0, 0.0, 0.0};  // K关节角度
