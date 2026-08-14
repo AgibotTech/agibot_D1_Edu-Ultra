@@ -1,0 +1,20 @@
+# 创建 .gitignore 文件
+cat > .gitignore << EOF
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Sphinx 构建输出
+docs/_build/
+docs/build/
+
+# 虚拟环境
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+EOF
