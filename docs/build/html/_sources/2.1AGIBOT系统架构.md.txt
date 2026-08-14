@@ -1,0 +1,6 @@
+2.1 AGIBOT系统架构
+==================
+
+![image](./images/AGIBot_System_Architecture.png)
+
+**注：实线框图为已实现功能，虚线框图可通过二次开发实现**
