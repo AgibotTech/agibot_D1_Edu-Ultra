@@ -65,30 +65,30 @@ int main() {
     if (kbhit()) {
       char ch = getchar();  // 获取按键
       switch (ch) {
-        case 'w':  // 向前 move(vx, vy, yaw_rate) 以1m/s的速度向前移动，
+        case 'w':  // 向前 move(vx, vy, yaw_rate) 以0.3m/s的速度向前移动，
                    // 侧向速度vy为零， 旋转速度yaw_rate为零,
                    // 使能巡逻模式支持超低速控制，默认为false
-          ret = highlevel.move(1.0, 0.0, 0.0);
+          ret = highlevel.move(0.3, 0.0, 0.0);
           break;
-        case 's':  // 向后 move(vx, vy, yaw_rate) 以-1m/s的速度向后移动，
+        case 's':  // 向后 move(vx, vy, yaw_rate) 以-0.3m/s的速度向后移动，
                    // 侧向速度vy为零， 旋转速度yaw_rate为零
-          ret = highlevel.move(-1.0, 0.0, 0.0);
+          ret = highlevel.move(-0.3, 0.0, 0.0);
           break;
-        case 'a':  // 向左 move(vx, vy, yaw_rate) 以1m/s的速度向左移动，
+        case 'a':  // 向左 move(vx, vy, yaw_rate) 以0.3m/s的速度向左移动，
                    // 前向速度vx为零， 旋转速度yaw_rate为零
-          ret = highlevel.move(0.0, 1.0, 0.0);
+          ret = highlevel.move(0.0, 0.3, 0.0);
           break;
-        case 'd':  // 向右 move(vx, vy, yaw_rate) 以-1m/s的速度向右移动，
+        case 'd':  // 向右 move(vx, vy, yaw_rate) 以-0.3m/s的速度向右移动，
                    // 前向速度vx为零， 旋转速度yaw_rate为零
-          ret = highlevel.move(0.0, -1.0, 0.0);
+          ret = highlevel.move(0.0, -0.3, 0.0);
           break;
-        case 'q':  // 左转 move(vx, vy, yaw_rate) 以1m/s的速度向左转动，
+        case 'q':  // 左转 move(vx, vy, yaw_rate) 以0.3m/s的速度向左转动，
                    // 侧向速度vy为零， 前向速度vx为零
-          ret = highlevel.move(0.0, 0.0, 1.0);
+          ret = highlevel.move(0.0, 0.0, 0.3);
           break;
-        case 'e':  // 右转 move(vx, vy, yaw_rate) 以-1m/s的速度向右转动，
+        case 'e':  // 右转 move(vx, vy, yaw_rate) 以-0.3m/s的速度向右转动，
                    // 侧向速度vy为零， 前向速度vx为零
-          ret = highlevel.move(0.0, 0.0, -1.0);
+          ret = highlevel.move(0.0, 0.0, -0.3);
           break;
         case 'c':  // 停止 move(vx, vy, yaw_rate) 前向速度vx为零，
                    // 侧向速度vy为零， 前向速度vx为零  停止移动

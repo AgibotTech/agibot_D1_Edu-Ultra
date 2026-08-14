@@ -1,17 +1,19 @@
 import os
 import platform
 import sys
-arch = platform.machine().replace('amd64', 'x86_64').replace('arm64', 'aarch64')
-lib_path = os.path.abspath(f'{os.path.dirname(__file__)}/../../../../lib/zsl-1w/{arch}')
-
-sys.path.insert(0, lib_path)
-import mc_sdk_zsl_1w_py
 import time
 
+# Setup library path
+arch = platform.machine().replace('amd64', 'x86_64').replace('arm64', 'aarch64')
+lib_path = os.path.abspath(
+    f'{os.path.dirname(__file__)}/../../../../lib/zsl-1/{arch}')
+sys.path.insert(0, lib_path)
+
+import mc_sdk_zsl_1_py
 
 def print_menu():
     """Prints the interactive command menu."""
-    print("\nD1 Ultra-W Interactive Demo")
+    print("\nZsiBot Interactive Demo")
     print("-----------------------")
     print("1. Stand Up")
     print("2. Lie Down")
@@ -21,19 +23,19 @@ def print_menu():
     print("6. Move Right")
     print("7. Turn Left")
     print("8. Turn Right")
-    print("9. Passive")
-    print("10. shakeHand")
+    print("9. Jump")
+    print("10. Front Jump")
+    print("11. Backflip")
+    print("12. Shake Hand")
+    print("13. Attitude Control (Gentle Wobble)")
     print("0. Exit")
     print("-----------------------")
-
-
-
 
 
 def main():
     """Main function to run the interactive demo."""
     try:
-        app=mc_sdk_zsl_1w_py.HighLevel()
+        app = mc_sdk_zsl_1_py.HighLevel()
         # Use 127.0.0.1 for both local and robot IP for simulation/local testing
         app.initRobot("127.0.0.1", 43988, "127.0.0.1")
         print("Successfully initialized robot connection.")
@@ -87,29 +89,42 @@ def main():
                 time.sleep(2)
                 app.move(0, 0, 0)  # Stop
             elif choice == '9':
-                print("Executing: passive")
-                app.passive()
+                print("Executing: Jump")
+                app.jump()
                 time.sleep(4)
             elif choice == '10':
-                print("Executing: shakeHand")
+                print("Executing: Front Jump")
+                app.frontJump()
+                time.sleep(4)
+            elif choice == '11':
+                print("Executing: Backflip")
+                app.backflip()
+                time.sleep(4)
+            elif choice == '12':
+                print("Executing: Shake Hand")
                 app.shakeHand()
                 time.sleep(4)
+            elif choice == '13':
+                print("Executing: Attitude Control (for 4s)")
+                app.attitudeControl(0.1, 0.1, 0.1, 0.1)
+                time.sleep(4)
+                app.standUp()  # Return to a stable state
+                time.sleep(2)
             elif choice == '0':
                 print("Exiting demo. Robot will lie down.")
                 app.lieDown()
                 time.sleep(3)
-                app.passive()
-                time.sleep(3)
                 break
             else:
                 print("Invalid choice. Please try again.")
+
             # Ensure robot is in a stable standing state after most actions
             if choice not in ['1', '2', '0']:
                 app.standUp()
                 time.sleep(2)
 
     except ImportError:
-        print("Error: The 'mc_sdk_zsl_1w_py' module could not be found.")
+        print("Error: The 'mc_sdk_zsl_1_py' module could not be found.")
         print(
             f"Please ensure the library for your architecture ('{arch}') is in the path: {lib_path}")
     except Exception as e:
@@ -118,9 +133,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
