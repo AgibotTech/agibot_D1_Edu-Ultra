@@ -14,7 +14,17 @@ release = 'V0.2.7'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['myst_parser']
+# extensions = ['myst_parser']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',
+    'myst_parser',
+    'sphinx_tippy',
+    'sphinx_multiversion',
+    'sphinx_design',
+    'sphinx_pdf_generate',
+    'sphinxcontrib.mermaid',
+]
 
 templates_path = ['_templates']
 exclude_patterns = []
